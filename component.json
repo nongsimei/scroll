@@ -1,0 +1,6 @@
+{
+  "repos": "https://github.com/huya-fed/scroll",
+  "version": "v1.0.0",
+  "name": "scroll",
+  "main": "scroll.js"
+}
