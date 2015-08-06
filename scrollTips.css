@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.mod-list-more {
+    font-size: 14px;
+    color: #3a3a3a;
+    font-family: "Microsoft YaHei";
+    text-align: center
+}
+
+.mod-list-more .icon-loading {
+    vertical-align: middle;
+    display: inline-block;
+    background: url(http://assets.dwstatic.com/amkit/p/duya/live2/img/loading.gif) no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px
+}
+
+.mod-list-more .more-empty,.mod-list-more .more-end {
+    display: none
+}
+
+.mod-list-more .more-empty p {
+    color: #323232;
+    font-size: 14px;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;vertical-align: middle;
+    text-align: left
+}
+
+.mod-list-more .more-empty em {
+    font-size: 12px;
+    color: #aeaeae
+}
+
+.mod-list-more .icon-empty {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    background: url(http://assets.dwstatic.com/amkit/p/duya/live2/img/pic-global.png) -155px -117px no-repeat;
+    margin-right: 15px
+}
