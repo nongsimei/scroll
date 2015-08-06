@@ -102,14 +102,13 @@ ScrollLoad.prototype={
 	}
 }
 
-module.exports = ScrollLoad;
-
+if ( typeof dwfis !== "undefined" && typeof dwfis.define === "function") {
+    // AMD. Register as an anonymous module.
+    module.exports = ScrollLoad;
+} else {
+    window.ScrollLoad = ScrollLoad;
+}
 
 }())
 
-if ( typeof dwfis !== "undefined" && typeof dwfis.define === "function") {
-    // AMD. Register as an anonymous module.
-    module.exports = ZENG;
-} else {
-    window.ZENG = ZENG;
-}
+
