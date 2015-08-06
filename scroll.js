@@ -87,11 +87,11 @@ ScrollLoad.prototype={
 	loading : function(){
 		this.setMoreStatus('loading');
 	},
-	empty : function(){
-		this.setMoreStatus('empty');//列表为空
+	empty : function(txt){
+		this.setMoreStatus('empty',txt);//列表为空
 	},
-	done : function(){
-		this.setMoreStatus('allLoaded');//全部load完了，不能再load了
+	done : function(txt){
+		this.setMoreStatus('allLoaded',txt);//全部load完了，不能再load了
 		this.removeListen();//解绑
 	},
 	addMoreTips:function(){
@@ -110,18 +110,18 @@ ScrollLoad.prototype={
 		}
 	},
 
-	setMoreStatus:function(status){
+	setMoreStatus:function(status,txt){
 		if(this.config.needTips){
 			this.loadTips.children().hide();
 			switch(status){
 				case 'allLoaded':
-					this.loadTips.find('.more-end').fadeIn('slow');
+					this.loadTips.find('.more-end').html(txt).fadeIn('slow');
 					break;
 				case 'loading':
 					this.loadTips.find('.more-loading').show();
 					break;
 				case 'empty':
-					this.loadTips.find('.more-empty').show('slow');
+					this.loadTips.find('.more-empty').html(txt).show('slow');
 					break;
 				default:
 					break;	
