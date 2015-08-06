@@ -14,12 +14,17 @@
 			scrollDom : window,
 			listId : '#listWrap',
 			cbFunc : null,
+			needTips : true,
+			delay : 500,
 			bottomHeight: $('.duya-footer')[0].scrollHeight||0//距离底部多高时就可以触发事件
 		};
 		this.config=$.extend(defaults,configs);
 
 		this.isScrolling = false;//判断是否在Scrolling的锁
-		this.addMoreTips();//容器尾部添加tips
+
+		if(this.config.needTips){
+			this.addMoreTips();//容器尾部添加tips
+		}
 	}
 
 ScrollLoad.prototype={
@@ -42,6 +47,7 @@ ScrollLoad.prototype={
 
 	},
 	scrollHandler:function(e){
+
 		if(this.isScrolling)return;
 
 		this.isScrolling=true;
@@ -54,20 +60,39 @@ ScrollLoad.prototype={
 		var scrollPos=scrollTop+windowHeight;//滚动条位置
 		var footerPos=scrollHeight-footerHeight;//列表底部位置
 
+		var _ts=this;
 
-		if(footerPos-scrollPos<=0){//滚到列表尾部
+
+		if(footerPos<=scrollPos){//滚到列表尾部
 			//加载更多
-
-			this.setMoreStatus('loading');
+			this.loading();
 			this.config.cbFunc.apply(this);
-
+			setTimeout(function(){
+				_ts.endScroll();
+			},this.config.delay);
 		}else{
-			var _ts=this;
-			setTimeout(function(){_ts.endScroll()},50);
+			
+			setTimeout(function(){
+				_ts.endScroll();
+			},20);
 		}
 	},
 	endScroll : function(){
 		this.isScrolling=false;
+		this.hideLoading();
+	},
+	hideLoading : function(){
+		this.setMoreStatus('hide');
+	},
+	loading : function(){
+		this.setMoreStatus('loading');
+	},
+	empty : function(){
+		this.setMoreStatus('empty');//列表为空
+	},
+	done : function(){
+		this.setMoreStatus('allLoaded');//全部load完了，不能再load了
+		this.removeListen();//解绑
 	},
 	addMoreTips:function(){
 		this.loadTips=$('<div/>').attr('class','mod-list-more').html('\
@@ -86,18 +111,21 @@ ScrollLoad.prototype={
 	},
 
 	setMoreStatus:function(status){
-		
-		this.loadTips.children().hide();
-		switch(status){
-			case 'allLoaded':
-				this.loadTips.find('.more-end').fadeIn('slow');
-				break;
-			case 'loading':
-				this.loadTips.find('.more-loading').show();
-				break;
-			case 'empty':
-				this.loadTips.find('.more-empty').show('slow');
-				break;	
+		if(this.config.needTips){
+			this.loadTips.children().hide();
+			switch(status){
+				case 'allLoaded':
+					this.loadTips.find('.more-end').fadeIn('slow');
+					break;
+				case 'loading':
+					this.loadTips.find('.more-loading').show();
+					break;
+				case 'empty':
+					this.loadTips.find('.more-empty').show('slow');
+					break;
+				default:
+					break;	
+			}
 		}
 	}
 }
