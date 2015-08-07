@@ -115,13 +115,15 @@ ScrollLoad.prototype={
 			this.loadTips.children().hide();
 			switch(status){
 				case 'allLoaded':
-					this.loadTips.find('.more-end').html(txt).fadeIn('slow');
+					this.loadTips.find('.more-end').fadeIn('slow');
+					txt?this.loadTips.find('.more-end').html(txt):'';
 					break;
 				case 'loading':
 					this.loadTips.find('.more-loading').show();
 					break;
 				case 'empty':
-					this.loadTips.find('.more-empty').html(txt).show('slow');
+					this.loadTips.find('.more-empty').show('slow');
+					txt?this.loadTips.find('.more-end').find('span').html(txt):'';
 					break;
 				default:
 					break;	
