@@ -79,7 +79,7 @@ ScrollLoad.prototype={
 	},
 	endScroll : function(){
 		this.isScrolling=false;
-		this.hideLoading();
+		this.loadTips.find('.more-loading').hide();
 	},
 	hideLoading : function(){
 		this.setMoreStatus('hide');
