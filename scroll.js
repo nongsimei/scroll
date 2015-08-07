@@ -126,6 +126,7 @@ ScrollLoad.prototype={
 					txt?this.loadTips.find('.more-end').find('span').html(txt):'';
 					break;
 				default:
+					this.loadTips.find('.more-loading').hide();
 					break;	
 			}
 		}
